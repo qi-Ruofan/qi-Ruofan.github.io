@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="javascriptjavascript——this指向"><meta name="keywords" content="this"><meta name="author" content="Ruofan Qi,undefined"><meta name="copyright" content="Ruofan Qi"><title>javascriptjavascript——this指向【Happy World】</title><link rel="stylesheet" href="/css/fan.css"><link rel="stylesheet" href="/css/thirdparty/jquery.mCustomScrollbar.min.css"><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><link rel="icon" href="/favicon.ico"><!-- script(src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")--><script src="/js/mathjax/mathjax.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+});
+</script><script>var isPassword = '' || false;
+if (isPassword) {
+    if (prompt('请输入文章密码') !== '') {
+        alert('密码错误！');
+        history.back();
+    }
+}</script><script>window.GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  gitment: ,
+  valine: ,
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Happy World" type="application/atom+xml">
+</head><body><canvas id="universe"></canvas><!--#body--><div id="sidebar"><div class="toggle-sidebar-info button-hover"><span data-toggle="文章目录">站点概览</span></div><div class="sidebar-toc"><div class="sidebar-toc-title">目录</div><div class="sidebar-toc-progress"><span class="progress-notice">您已阅读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc-progress-bar"></div></div><div class="sidebar-toc-content" id="sidebar-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#this的设计目的"><span class="toc-number">1.</span> <span class="toc-text">this的设计目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this的绑定规则："><span class="toc-number">2.</span> <span class="toc-text">this的绑定规则：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#默认绑定"><span class="toc-number">3.</span> <span class="toc-text">默认绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式绑定"><span class="toc-number">4.</span> <span class="toc-text">隐式绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显式绑定"><span class="toc-number">5.</span> <span class="toc-text">显式绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new绑定"><span class="toc-number">6.</span> <span class="toc-text">new绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6箭头函数绑定"><span class="toc-number">7.</span> <span class="toc-text">ES6箭头函数绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#规则优先级"><span class="toc-number">8.</span> <span class="toc-text">规则优先级</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info-avatar"><img class="author-info-avatar-img" src="/avatar.jpeg"></div><div class="author-info-name">Ruofan Qi</div><div class="author-info-description">帆f的Blog</div><div class="links-buttons"><a class="links-button button-hover" href="https://github.com/qi-Ruofan" target="_blank">GitHub<i class="icon-dot bg-color6"></i></a><a class="links-button button-hover" href="mailto:qrfdddd@gmail.com" target="_blank">E-Mail<i class="icon-dot bg-color7"></i></a><a class="links-button button-hover" href="https://www.yuque.com/u1834218/arfxhs/oo9h2a" target="_blank">笔记<i class="icon-dot bg-color10"></i></a></div><div class="author-info-articles"><a class="author-info-articles-archives article-meta" href="/archives"><span class="pull-top">日志</span><span class="pull-bottom">7</span></a><a class="author-info-articles-tags article-meta" href="/tags"><span class="pull-top">标签</span><span class="pull-bottom">7</span></a><a class="author-info-articles-categories article-meta" href="/categories"><span class="pull-top">分类</span><span class="pull-bottom">5</span></a></div></div></div><div id="main-container"><header><div id="menu-outer"><i class="menu-list-icon fas fa-bars"></i><nav id="menu-inner"><a class="menu-item" href="/">首页</a><a class="menu-item" href="/tags">标签</a><a class="menu-item" href="/categories">分类</a><a class="menu-item" href="/archives">归档</a><a class="menu-item" href="/about">关于</a></nav><div class="right-info"><a class="title-name" href="/">Happy World</a><span id="now-time"></span></div></div></header><div id="content-outer"><div id="content-inner"><article id="post"><div class="post-header"><div class="title">javascriptjavascript——this指向</div><div class="container"><time class="button-hover post-date"><i class="fas fa-calendar-alt article-icon" aria-hidden="true"></i> 发表于 2020-09-06 | 更新于 2020-09-06</time><!--time.button-hover.post-date #[i.fas.fa-calendar-alt.article-icon(aria-hidden="true")] #[=__('post.modified')] #[=date(page['updated'], config.date_format)]--><div class="button-hover categories"><i class="fa fa-inbox article-icon" aria-hidden="true"></i><a class="link-a" href="/categories/javascript/">javascript</a></div><div class="button-hover tags"><i class="fa fa-tag article-icon" aria-hidden="true"></i><a class="link-a" href="/tags/this/">this</a></div></div></div><div class="main-content"><h2 id="this的设计目的"><a href="#this的设计目的" class="headerlink" title="this的设计目的"></a>this的设计目的</h2><p>指向函数运行时所在的环境。</p>
+<h2 id="this的绑定规则："><a href="#this的绑定规则：" class="headerlink" title="this的绑定规则："></a>this的绑定规则：</h2><ol>
+<li>默认绑定（严格/非严格模式）</li>
+<li>隐式绑定</li>
+<li>显式绑定</li>
+<li>new绑定</li>
+<li>ES6箭头函数绑定</li>
+</ol>
+<h2 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h2><ol>
+<li>默认绑定——严格模式<br>严格模式下不能将全局对象window作为默认绑定，此时this会绑定到undefined,但是在严格模式下调用函数则不会影响默认绑定。</li>
+<li>默认绑定——非严格模式<br>在非严格模式下，此时this指向全局对象</li>
+</ol>
+<h2 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h2><ul>
+<li>当函数作为对象的属性存在时，通过对象属性执行函数时，此时隐式绑定规则会将this绑定到对象上</li>
+<li>通过赋值操作后执行函数，会应用默认绑定</li>
+<li>再回调函数中执行，也对丢失this绑定，应用默认绑定</li>
+</ul>
+<h2 id="显式绑定"><a href="#显式绑定" class="headerlink" title="显式绑定"></a>显式绑定</h2><p>（通过call，apply，bind绑定）<br>call：使用一个指定的this和若干个指定的参数调用某个函数或方法<br>call做了哪些事：</p>
+<ul>
+<li>将函数设为对象的属性</li>
+<li>指定函数的this，并进行传参</li>
+<li>执行&amp;删除函数</li>
+<li>判定如果没有指定要绑定的this，非严格模式下默认指向全局对象<br>可以看到值调用call方法后，会将this绑定到指定对象，所以称为显示绑定<br>多次调用以第一次为准<br>没有传入指定对象/null/undefined，采用默认绑定</li>
+</ul>
+<h2 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h2><p>构造函数在使用new后，执行了什么操作</p>
+<ul>
+<li>他创建（构造）了一个全新的对象</li>
+<li>他会被执行<code>[[Prototype]]</code>也就是<code>__proto__</code>连接</li>
+<li>他使this指向新创建的对象</li>
+<li>通过new创建的每个对象将最终被<code>[[Prototype]]</code>链接到这个函数的<code>prototype</code>对象上</li>
+<li>如果函数没有返回对象类型Object（包含Function,Array,Date,RegExg,Error），那么new表达式中的函数调用将返回该对象引用<br>所以在使用new调用构造函数后，会构造一个新对象并将函数调用中的this绑定到新对象上<br>构造函数存在返回值，可以将函数的返回值分成三种情况：</li>
+<li>返回一个对象</li>
+<li>没有返回值，即默认返回undefined</li>
+<li>返回基本数据类型<br>所以使用new绑定时，需要判断函数返回的值是否为一个对象，如果是对象，那么this会绑定到返回的对象上。</li>
+</ul>
+<h2 id="ES6箭头函数绑定"><a href="#ES6箭头函数绑定" class="headerlink" title="ES6箭头函数绑定"></a>ES6箭头函数绑定</h2><p>ES6新增了一种函数类型：箭头函数，箭头函数调用时无法使用上面四种规则了，它和普通函数最不同的一点就是对于箭头函数的this指向，是根据它外层（函数/全局）作用域来决定。<br>箭头函数this绑定后无法被修改</p>
+<h2 id="规则优先级"><a href="#规则优先级" class="headerlink" title="规则优先级"></a>规则优先级</h2><ol>
+<li>new绑定<br><code>var obj = new Foo();</code><br>this绑定新的对象上</li>
+<li>显示绑定<br><code>var obj = foo.call(bar);</code><br>this绑定到指定对象上<br>若指定对象为null/undefined或着没传，则使用默认绑定规则</li>
+<li>隐式绑定<br><code>var obj = bar.foo();</code><br>this绑定到调用方法的对象上</li>
+<li>默认绑定<br><code>foo();</code><br>this在严格模式下绑定到undefined<br>在非严格模式下绑定到全局对象</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright-author"><span class="post-copyright-meta">本文作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ruofan Qi</a></span></div><div class="post-copyright-type"><span class="post-copyright-meta">本文链接: </span><span class="post-copyright-info"><a href="http://qileshijie.cn/2020/09/06/javascriptjavascript%E2%80%94%E2%80%94this%E8%AF%A6%E8%A7%A3/">http://qileshijie.cn/2020/09/06/javascriptjavascript%E2%80%94%E2%80%94this%E8%AF%A6%E8%A7%A3/</a></span></div><div class="post-copyright-notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://qileshijie.cn">Happy World</a>！</span></div></div></article><div id="pagination"><div class="next-post pull-right"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span><a href="/2019/08/12/hello-my-first-blog/"><span>跨域请求</span><span>&nbsp;</span><i class="fas fa-angle-right"></i></a></div></div><!--div!= paginator()--></div></div><div class="button-hover" id="return-top"><i class="fas fa-arrow-up" aria-hidden="true"></i></div><footer><div id="footer"><div class="button-hover" id="side-button"><i class="fas fa-arrow-right"></i></div><div class="right-content"><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fas fa-file-o"></i></span><span id="busuanzi_value_page_pv"></span><span></span></div><div class="copyright">&copy;2017 ～ 2020 By Ruofan Qi</div></div></div></footer></div><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery-3.3.1.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/velocity.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery.mCustomScrollbar.concat.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/fan.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/canvas_bg.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/utils.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/scroll.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/sidebar.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/copy.js"></script><!--script(src=url)--></body></html>
