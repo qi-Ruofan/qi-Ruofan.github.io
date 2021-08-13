@@ -1,17 +1,65 @@
-<h1>技术能力<h1>
-<ul>
-  <li>
-    熟悉前端基础html,javasctip,css3
-  </li>
-  <li>
-    较熟悉前端框架：vue
-  </li>
-  <li>
-    较熟悉小程序原生开发
-  </li>
-<ul>
-<style>
-  ul,li {
-    list-style: none
-  }  
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,body {
+      font-size:62.5%;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    ol, li {
+      list-style: none;
+    }
+    .wrap {
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      position: relative;
+      width: 30rem;
+      height: 20rem;
+      margin: 10rem auto;
+      border: .3rem solid #000;
+    }
+    .tit {
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+      background: #fff;
+    }
+    .content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-top: 3rem;
+    }
+    .content li {
+      width: 25rem;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="container">
+      <h1 class="tit">个人简介</h1>
+      <ol class="content">
+        <li>1.熟悉html,css3,javascript</li>
+        <li>2.熟练使用vue全家桶及elementUI,Vant</li>
+        <li>3.熟悉webpack、gulp打包构建工具</li>
+        <li>4.熟悉小程序原生开发</li>
+        <li>5.熟悉echarts</li>
+        <li>6.了解nodejs，react，TypeScript，浏览器原理</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
